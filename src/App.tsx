@@ -31,7 +31,7 @@ function App() {
                   <Route path="/performance" element={<Performance />} />
                 </Routes>
               </div>
-              <SpecificationSidebar currentModule={currentModule} />
+              {/* <SpecificationSidebar currentModule={currentModule} /> */}
             </main>
           </div>
         </div>
