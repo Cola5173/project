@@ -37,7 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentModule, onModuleChange }) => {
   return (
     <nav className="w-64 bg-white shadow-lg border-r border-gray-200">
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">功能导航</h2>
+        {/* <h2 className="text-lg font-semibold text-gray-800 mb-4">功能导航</h2> */}
         <ul className="space-y-2">
           {menuItems.map((item) => {
             const Icon = item.icon;
