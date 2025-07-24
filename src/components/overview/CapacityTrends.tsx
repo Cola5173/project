@@ -77,24 +77,24 @@ const CapacityTrends: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-800">容量使用趋势</h3>
-        <select 
-          value={selectedPeriod}
-          onChange={(e) => setSelectedPeriod(e.target.value)}
-          className="text-sm border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="today">今日</option>
-          <option value="week">本周</option>
-          <option value="month">本月</option>
-          <option value="custom">自定义</option>
-        </select>
-      </div>
-      <div className="h-64">
-        <Line data={data} options={options} />
-      </div>
-    </div>
+    <div className="bg-white rounded-lg shadow-sm p-6 h-full">
+  <div className="flex items-center justify-between mb-4">
+    <h3 className="text-lg font-semibold text-gray-800">容量使用趋势</h3>
+    <select 
+      value={selectedPeriod}
+      onChange={(e) => setSelectedPeriod(e.target.value)}
+      className="text-sm border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="today">今日</option>
+      <option value="week">本周</option>
+      <option value="month">本月</option>
+      <option value="custom">自定义</option>
+    </select>
+  </div>
+  <div className="h-64 w-full">
+    <Line data={data} options={options} />
+  </div>
+</div>
   );
 };
 
