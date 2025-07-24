@@ -91,11 +91,11 @@ const Overview: React.FC = () => {
       </div>
 
       {/* 关键指标卡片 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        {metrics.map((metric, index) => (
-          <MetricCard key={index} {...metric} />
-        ))}
-      </div>
+      {/*<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">*/}
+      {/*  {metrics.map((metric, index) => (*/}
+      {/*    <MetricCard key={index} {...metric} />*/}
+      {/*  ))}*/}
+      {/*</div>*/}
 
       {/* 资源分布图 */}
       <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
