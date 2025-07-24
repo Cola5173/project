@@ -19,23 +19,38 @@ ChartJS.register(
   Legend
 );
 
+const getRandomCount = () => Math.floor(Math.random() * 7001) + 3000; // 3000-10000
+
 const ActivityStats: React.FC = () => {
   const [activityType, setActivityType] = useState('high');
 
   const highFrequencyData = [
-    { id: 'data001', name: '用户行为数据', business: '电商系统', count: 8524 },
-    { id: 'data002', name: '交易流水数据', business: '支付系统', count: 6241 },
-    { id: 'data003', name: '库存管理数据', business: '仓储系统', count: 4892 },
-    { id: 'data004', name: '日志数据', business: '监控系统', count: 3156 },
-    { id: 'data005', name: '配置信息', business: '管理系统', count: 2847 },
+    { id: 'data001', name: '用户行为数据', business: '电商系统', count: getRandomCount() },
+    { id: 'data002', name: '交易流水数据', business: '支付系统', count: getRandomCount() },
+    { id: 'data003', name: '库存管理数据', business: '仓储系统', count: getRandomCount() },
+    { id: 'data004', name: '日志数据', business: '监控系统', count: getRandomCount() },
+    { id: 'data005', name: '配置信息', business: '管理系统', count: getRandomCount() },
   ];
 
+  const lowFrequencyData = [
+    { id: 'data006', name: '历史归档', business: '归档系统', count: getRandomCount() },
+    { id: 'data007', name: '测试数据', business: '测试系统', count: getRandomCount() },
+    { id: 'data008', name: '临时表', business: '临时系统', count: getRandomCount() },
+    { id: 'data009', name: '备份数据', business: '备份系统', count: getRandomCount() },
+    { id: 'data010', name: '旧日志', business: '日志系统', count: getRandomCount() },
+  ];
+
+  // 按activityType排序
+  const sortedData = activityType === 'high'
+    ? [...highFrequencyData].sort((a, b) => b.count - a.count)
+    : [...lowFrequencyData].sort((a, b) => a.count - b.count);
+
   const chartData = {
-    labels: highFrequencyData.map(item => item.name),
+    labels: sortedData.map(item => item.name),
     datasets: [
       {
         label: '访问次数',
-        data: highFrequencyData.map(item => item.count),
+        data: sortedData.map(item => item.count),
         backgroundColor: 'rgba(59, 130, 246, 0.8)',
         borderColor: 'rgba(59, 130, 246, 1)',
         borderWidth: 1,
@@ -102,7 +117,7 @@ const ActivityStats: React.FC = () => {
         <div>
           <h4 className="font-semibold mb-3">Top 10 {activityType === 'high' ? '高频' : '低频'}数据</h4>
           <div className="space-y-2 max-h-64 overflow-y-auto">
-            {highFrequencyData.map((item) => (
+            {sortedData.map((item) => (
               <div
                 key={item.id}
                 className="flex items-center justify-between p-3 bg-gray-50 rounded cursor-pointer hover:bg-gray-100 transition-colors"

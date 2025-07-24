@@ -7,13 +7,32 @@ interface ResourceNode {
   type: string;
   status: 'normal' | 'warning' | 'error';
   usage: number;
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   color: string;
 }
 
 interface ResourceDistributionProps {
   nodes: ResourceNode[];
   selectedFilter: string;
+}
+
+// 工具函数：生成最近一个月的随机时间
+function getRandomRecentDate() {
+  const now = new Date();
+  const past = new Date();
+  past.setDate(now.getDate() - 30);
+  const randomTime = past.getTime() + Math.random() * (now.getTime() - past.getTime());
+  const d = new Date(randomTime);
+  // 格式化为 yyyy-MM-dd HH:mm
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+// 工具函数：格式化当前时间为yyyy-MM-dd HH:mm
+function getNowDateTime() {
+  const d = new Date();
+  const pad = (n: number) => n.toString().padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
 const ResourceDistribution: React.FC<ResourceDistributionProps> = ({ nodes, selectedFilter }) => {
@@ -117,7 +136,7 @@ const ResourceDistribution: React.FC<ResourceDistributionProps> = ({ nodes, sele
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">最近更新:</span>
-                <span className="font-medium">2024-01-15 14:32</span>
+                <span className="font-medium">{getNowDateTime()}</span>
               </div>
             </div>
             <div className="mt-6 flex justify-end">
