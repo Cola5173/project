@@ -3,6 +3,7 @@ import {Server, Cloud, AlertTriangle, TrendingUp, Activity, Database} from 'luci
 import ResourceDistribution from '../components/overview/ResourceDistribution';
 import CapacityTrends from '../components/overview/CapacityTrends';
 import DataTypePieChart from '../components/overview/DataTypePieChart';
+import ActivityStats from '../components/overview/ActivityStats';
 
 const Overview: React.FC = () => {
     const [selectedFilter, setSelectedFilter] = useState('all');
@@ -121,9 +122,10 @@ const Overview: React.FC = () => {
                 <DataTypePieChart/>
             </div>
 
-            
-
-                
+            {/* 数据活跃度 */}
+            <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <ActivityStats />
+            </div>
 
         </div>
     );
