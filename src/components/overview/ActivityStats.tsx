@@ -69,7 +69,7 @@ const ActivityStats: React.FC = () => {
   return (
     <div className="bg-white rounded-lg shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-800">数据活跃度统计</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mr-4">数据活跃度统计</h3>
         <div className="flex space-x-2">
           <button
             onClick={() => setActivityType('high')}

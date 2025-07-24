@@ -8,13 +8,15 @@ import ActivityStats from '../components/overview/ActivityStats';
 const Overview: React.FC = () => {
     const [selectedFilter, setSelectedFilter] = useState('all');
 
+    // 随机生成usage
+    const getRandomUsage = () => Math.floor(Math.random() * 56) + 40; // 40-95
+
     const resourceNodes = [
         {
             id: 'server1',
             name: '服务器-01',
             type: 'server',
-            status: 'normal',
-            usage: 85,
+            usage: getRandomUsage(),
             icon: Server,
             color: 'blue'
         },
@@ -22,8 +24,7 @@ const Overview: React.FC = () => {
             id: 'server2',
             name: '服务器-02',
             type: 'server',
-            status: 'normal',
-            usage: 62,
+            usage: getRandomUsage(),
             icon: Server,
             color: 'green'
         },
@@ -31,8 +32,7 @@ const Overview: React.FC = () => {
             id: 'server3',
             name: '服务器-03',
             type: 'server',
-            status: 'warning',
-            usage: 92,
+            usage: getRandomUsage(),
             icon: Server,
             color: 'yellow'
         },
@@ -40,12 +40,22 @@ const Overview: React.FC = () => {
             id: 'cloud1',
             name: '云存储-01',
             type: 'cloud',
-            status: 'normal',
-            usage: 45,
+            usage: getRandomUsage(),
             icon: Cloud,
             color: 'purple'
         }
-    ];
+    ].map(node => ({
+        ...node,
+        status: node.usage < 70 ? 'normal' as const : 'warning' as const
+    }));
+
+    // 根据selectedFilter筛选resourceNodes
+    const filteredResourceNodes = resourceNodes.filter(node => {
+        if (selectedFilter === 'all') return true;
+        if (selectedFilter === 'local') return node.type === 'server';
+        if (selectedFilter === 'cloud') return node.type === 'cloud';
+        return true;
+    });
 
     const metrics = [
         {
@@ -113,7 +123,7 @@ const Overview: React.FC = () => {
                         ))}
                     </div>
                 </div>
-                <ResourceDistribution nodes={resourceNodes} selectedFilter={selectedFilter}/>
+                <ResourceDistribution nodes={filteredResourceNodes} selectedFilter={selectedFilter}/>
             </div>
 
             {/* 容量使用趋势和数据类型占比 */}
@@ -126,7 +136,7 @@ const Overview: React.FC = () => {
             <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
                 <ActivityStats />
             </div>
-
+            
         </div>
     );
 };
